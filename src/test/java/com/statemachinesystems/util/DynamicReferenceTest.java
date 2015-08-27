@@ -2,6 +2,7 @@ package com.statemachinesystems.util;
 
 import org.junit.Test;
 
+import java.util.Date;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -115,5 +116,11 @@ public class DynamicReferenceTest {
         thread.start();
 
         assertThat(latch.await(1, TimeUnit.SECONDS), is(true));
+    }
+
+    @Test
+    public void toStringMethodDelegatesToValue() {
+        Object anObject = new Date();
+        assertThat(new DynamicReference<>(anObject).toString(), is(anObject.toString()));
     }
 }
