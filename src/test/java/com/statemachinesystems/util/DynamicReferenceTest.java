@@ -32,6 +32,14 @@ public class DynamicReferenceTest {
     }
 
     @Test
+    public void supplierReceivesOverriddenValue() {
+        DynamicReference<Integer> n = new DynamicReference<>(1);
+
+        int result = n.withValue(2, () -> 2 + n.get());
+        assertThat(result, is(4));
+    }
+
+    @Test
     public void nestedThunksReceiveOverriddenValuesInSingleThread() throws InterruptedException {
         DynamicReference<Integer> n  = new DynamicReference<>(1);
 

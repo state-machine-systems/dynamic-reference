@@ -1,5 +1,7 @@
 package com.statemachinesystems.util;
 
+import java.util.function.Supplier;
+
 /**
  * A dynamically-scoped reference.
  *
@@ -44,6 +46,27 @@ public class DynamicReference<T> {
 
         try {
             block.run();
+        } finally {
+            threadLocal.set(oldValue);
+        }
+    }
+
+    /**
+     * Override the value of the reference while executing the given block,
+     * returning the block's value.
+     *
+     * @param newValue  the overridden value to use within the given block
+     * @param block     the block to execute
+     * @param <R>       the return type of the block
+     *
+     * @return  the value returned by the block
+     */
+    public <R> R withValue(T newValue, Supplier<R> block) {
+        T oldValue = threadLocal.get();
+        threadLocal.set(newValue);
+
+        try {
+            return block.get();
         } finally {
             threadLocal.set(oldValue);
         }
