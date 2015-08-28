@@ -35,4 +35,14 @@ Here's an example of overriding a reference to `System.out`:
 
 This implementation is based on the `DynamicVariable` class from the Scala standard library.
 
+### Getting started
+
+This library is in the Maven Central repo, so just add the following chunk to your pom.xml (or the equivalent for Gradle/SBT/whatever):
+
+    <dependency>
+        <groupId>com.statemachinesystems</groupId>
+        <artifactId>dynamic-reference</artifactId>
+        <version>1.0</version>
+    </dependency>
+
 &copy; 2015 State Machine Systems Ltd. [Apache Licence, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0)
